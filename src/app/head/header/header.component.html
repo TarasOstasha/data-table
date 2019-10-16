@@ -1,0 +1,116 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="todolist not-done">
+                <h1>{{title}}</h1>
+                <input [(ngModel)]="todosValue" name="todosValue" type="text" class="form-control add-todo"
+                    placeholder="Add todo">
+                <button (click)="addItem()" id="checkAll" class="btn btn-success">Mark all as done</button>
+                {{todosValue}}
+                <hr>
+                <ul id="sortable" class="list-unstyled">
+                    <li class="ui-state-default" *ngFor="let item of Items; let i=index">
+                        <div class="checkbox">
+                            <label [style.text-decoration]="checkedItem ? 'line-through' : 'none'">
+                                <input [(ngModel)]="checkedItem" type="checkbox" value="" />{{item.todosValue}}
+                            </label>
+                        </div>
+                    </li>
+                </ul>
+                <div class="todo-footer">
+                    <strong><span class="count-todos"></span></strong> Items Left
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="todolist">
+                <h1>Already Done</h1>
+                <ul id="done-items" class="list-unstyled">
+                    <li *ngFor="let removedItem of removedItems">{{removedItem}}
+                        <button class="remove-item btn btn-default btn-xs pull-right">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </li>
+                    <li>done
+                        <button class="remove-item btn btn-default btn-xs pull-right">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <h1>data users table</h1>
+    <input type="text" [(ngModel)]="name" placeholder="name" />
+    <br>
+    <input type="text" [(ngModel)]="surname" placeholder="surname" />
+    <br>
+    <input type="text" [(ngModel)]="country" placeholder="country" />
+    <br>
+    <input type="text" [(ngModel)]="city" placeholder="city" />
+    <br>
+    <input type="text" [(ngModel)]="position" placeholder="position" />
+    <br>
+    <input type="name" [(ngModel)]="age" placeholder="age" />
+    <br>
+    <button (click)="add()">Click to add value</button>
+    <br><br>
+    <select>
+        <option>show 10</option>
+        <option>show 50</option>
+    </select>
+    <input type="text" name="search" [(ngModel)]="searchText" autocomplete="off" class="pull-right" name="filter"
+        placeholder="filter" />
+    <!--Table-->
+    <table class="table table-striped w-auto table-dark table-hover">
+
+        <!--Table head-->
+        <thead class="thead-dark">
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Country</th>
+                <th>City</th>
+                <th>Position</th>
+                <th>Age</th>
+            </tr>
+        </thead>
+        <!--Table head-->
+
+        <!--Table body-->
+        <tbody>
+            <tr *ngFor="let row of rows | filter:searchText; let i = index" class="table-info">
+                <th scope="row">{{i}}</th>
+                <td>{{ row.name }}</td>
+                <td>{{ row.surname }}</td>
+                <td>{{ row.country }}</td>
+                <td>{{ row.city }}</td>
+                <td>{{ row.position }}</td>
+                <td>{{ row.age }}</td>
+            </tr>
+
+            <!--Table body-->
+
+
+    </table>
+    <!--Table-->
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <!-- <li class="page-item"><a *ngIf="pageStart >= 100" (click)="prevData()" class="page-link" href="#">Previous</a></li> -->
+            <li class="page-item"><a  (click)="prevData($event)" class="page-link" href="JavaScript:void(0);">Previous</a></li>
+            <li *ngFor="let page of paginationArr" class="page-item"><a (click)="currentData($event)" [ngClass]="status ? 'success' : 'no-success'" class="page-link" href="JavaScript:void(0);">{{ page }}</a></li>
+            <!-- <li class="page-item"><a  class="page-link" href="JavaScript:void(0);">1</a></li>
+            <li class="page-item"><a class="page-link" href="JavaScript:void(0);">2</a></li>
+            <li class="page-item"><a class="page-link" href="JavaScript:void(0);">3</a></li> -->
+            <li class="page-item"><a  (click)="NextData($event)" class="page-link" href="JavaScript:void(0);">Next</a></li>
+
+            <!-- <li class="page-item"><a *ngIf="pageStart < rows.length" (click)="NextData()" class="page-link" href="#">Next</a></li> -->
+        </ul>
+    </nav>
+</div>
